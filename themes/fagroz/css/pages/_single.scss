@@ -1,0 +1,288 @@
+// Single post styles
+@import "../abstracts/variables";
+
+.container--single {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.single-article {
+  display: grid;
+  gap: 2rem;
+}
+
+.single-article__main {
+  padding: 0;
+}
+
+.single-article__sidebar {
+  display: grid;
+  gap: 1rem;
+}
+
+.related-posts__header {
+  margin-bottom: 1rem;
+}
+
+.related-posts__heading {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: $gray-dark;
+  text-transform: uppercase;
+}
+
+.related-posts {
+  display: grid;
+  gap: 1rem;
+}
+
+.related-card {
+  position: relative;
+  display: block;
+  min-height: 220px;
+  border-radius: 22px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: $white;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.related-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.2);
+}
+
+.related-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.62));
+}
+
+.related-card__labels {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 3;
+  flex-wrap: wrap;
+}
+
+.related-card__date--pill {
+  background: rgba(255, 255, 255, 0.95);
+  color: $black;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.related-card__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 1.5rem;
+}
+
+.related-card__date {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: rgba($white, 0.8);
+  font-size: 0.85rem;
+}
+
+.related-card__title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.metabox {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  color: $gray-dark;
+  flex-wrap: wrap;
+
+  &--position-up {
+    margin-top: 0.75rem;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+  }
+
+  a.metabox__blog-home-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    color: $black;
+    text-decoration: none;
+  }
+
+  .metabox__main {
+    font-size: 0.95rem;
+    color: $gray-dark;
+    line-height: 1.5;
+  }
+}
+
+.preview-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.65rem 1rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  text-transform: none;
+  line-height: 1;
+  background: $positive-100;
+  color: white;
+}
+
+.generic-content {
+  margin-top: 0.5rem;
+  color: $brown-dark-100;
+  line-height: 1.85;
+  font-size: 1rem;
+}
+
+.generic-content p {
+  margin: 0 0 1.5rem 0;
+}
+
+.generic-content img,
+.generic-content figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem 0;
+  border-radius: 16px;
+}
+
+.generic-content figure {
+  margin: 1.5rem 0;
+}
+
+.generic-content figure figcaption,
+.generic-content figcaption {
+  text-align: right;
+  font-style: italic;
+  color: rgba($gray-dark, 0.7);
+}
+
+.generic-content blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 4px solid rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+}
+
+.post-taglines {
+  margin-top: 2rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.post-taglines__title {
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: $gray-dark;
+  font-size: 0.95rem;
+}
+
+.post-taglines__list {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.post-taglines__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: $yellow-100;
+  color: $black;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* Align tags visually with surrounding text and reduce container padding on small screens */
+.post-taglines {
+  padding-left: 0.25rem;
+}
+
+.post-taglines__list {
+  margin: 0;
+}
+
+/* Override rule that zeroes last paragraph margin in page sections */
+.page-section .post-taglines .post-taglines__title,
+.page-section p.post-taglines__title {
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .container--single {
+    padding: 3rem 1.5rem;
+  }
+
+  .single-article {
+    grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
+    align-items: start;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .container--single {
+    padding: 1.5rem 1rem;
+  }
+
+  .single-article {
+    grid-template-columns: 1fr;
+  }
+
+  .related-card {
+    min-height: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container--single {
+    padding: 1rem 0.85rem;
+  }
+
+  .metabox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .metabox__main {
+    margin-top: 1rem;
+  }
+
+  .related-card__content {
+    padding: 1.25rem;
+  }
+}

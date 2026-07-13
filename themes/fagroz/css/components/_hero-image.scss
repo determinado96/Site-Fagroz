@@ -1,0 +1,125 @@
+.hero-image {
+  position: relative;
+  max-width: 1400px;
+  margin: 3.5rem auto 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-xl) {
+    margin: 2px;
+    border-radius: 0;
+  }
+
+  // Nest Hub Max
+  @media (width: 1280px) and (height: 800px) {
+    margin: 2px;
+    border-radius: 0;
+  }
+}
+
+.hero-image__media {
+  position: relative;
+  height: clamp(320px, 65vh, 640px);
+  overflow: hidden;
+}
+
+.hero-image__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.hero-image__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.hero-image__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  box-sizing: border-box;
+
+  .container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+  }
+}
+
+.hero-image__content--center {
+  .container {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.hero-image__content--top-left {
+  .container {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: clamp(0.75rem, 2vw, 1.25rem);
+  }
+}
+
+.hero-image__content--bottom-left {
+  .container {
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
+    padding-left: clamp(1.25rem, 3vw, 2.5rem);
+  }
+}
+
+.hero-image__copy {
+  max-width: 820px;
+  width: 100%;
+}
+
+.hero-image__title {
+  margin: 0 0 0.75rem;
+  color: $white;
+  font-size: clamp(2.5rem, 6vw, 5.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.hero-image__text {
+  margin: 0;
+  color: $white;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.5;
+  max-width: 680px;
+}
+
+/* Styles for the paragraph block below the hero (section-specific) */
+.college-campus-life__text {
+  width: min(1400px, 100%);
+  max-width: 1400px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1rem;
+}
+
+.college-campus-life__paragraph {
+  margin: 0;
+  max-width: 820px;
+  color: #222;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: left;
+}

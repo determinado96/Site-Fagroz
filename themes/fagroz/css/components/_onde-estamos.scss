@@ -1,0 +1,221 @@
+/* ==========================================
+   ONDE ESTAMOS
+========================================== */
+
+.onde-estamos-section {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  overflow: hidden;
+}
+
+/* ----------------------------------
+   IMAGEM
+----------------------------------- */
+
+.onde-estamos-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.onde-estamos-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ----------------------------------
+   DEGRADÊ
+----------------------------------- */
+
+.onde-estamos-section::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, .98) 0%,
+      rgba(255, 255, 255, .96) 18%,
+      rgba(255, 255, 255, .82) 35%,
+      rgba(255, 255, 255, .45) 55%,
+      rgba(255, 255, 255, 0) 72%);
+
+}
+
+/* ----------------------------------
+   CONTEÚDO
+----------------------------------- */
+
+.onde-estamos-inner {
+
+  position: relative;
+
+  z-index: 3;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+.onde-estamos-text {
+
+  width: 360px;
+
+}
+
+.onde-estamos-text h2 {
+
+  margin: 0 0 40px;
+
+  font-size: 64px;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  color: #111;
+
+}
+
+.onde-endereco {
+
+  margin: 0;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+
+  color: #333;
+
+}
+
+/* ----------------------------------
+   BOTÃO
+----------------------------------- */
+
+.btn-mapa-floating {
+
+  position: absolute;
+
+  top: 35px;
+
+  right: 118px;
+
+  z-index: 4;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  background: #ffc400;
+
+  color: #111;
+
+  text-decoration: none;
+
+  padding: 14px 22px;
+
+  border-radius: 8px;
+
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
+
+  transition: .3s;
+
+}
+
+.btn-mapa-floating:hover {
+
+  transform: translateY(-2px);
+
+}
+
+/* ----------------------------------
+   RESPONSIVO
+----------------------------------- */
+
+@media (max-width: 992px) {
+
+  .onde-estamos-section {
+
+    height: 420px;
+
+  }
+
+  .onde-estamos-text {
+
+    width: 280px;
+
+  }
+
+  .onde-estamos-text h2 {
+
+    font-size: 44px;
+
+  }
+
+}
+
+@media (max-width:768px) {
+
+  .onde-estamos-section {
+
+    height: 380px;
+
+  }
+
+  .onde-estamos-section::before {
+
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, .92) 0%,
+        rgba(255, 255, 255, .75) 45%,
+        rgba(255, 255, 255, 0) 100%);
+
+  }
+
+  .onde-estamos-inner {
+
+    justify-content: center;
+
+    text-align: center;
+
+  }
+
+  .onde-estamos-text {
+
+    width: 100%;
+
+  }
+
+  .onde-estamos-text h2 {
+
+    font-size: 36px;
+
+  }
+
+  .btn-mapa-floating {
+
+    top: 20px;
+
+    right: 20px;
+
+    padding: 12px 18px;
+
+  }
+
+}
