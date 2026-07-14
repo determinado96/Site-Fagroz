@@ -1,0 +1,161 @@
+/* ==========================================================
+   EDUCAÇÃO
+========================================================== */
+
+.educacao-section {
+  padding: 5rem 0;
+}
+
+.educacao-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.educacao-text {
+  flex: 0 0 38%;
+}
+
+.educacao-text h2 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.1;
+  color: #111;
+}
+
+.educacao-text p {
+  margin: 0 0 2rem;
+  max-width: 42ch;
+  line-height: 1.8;
+  color: #4f555d;
+}
+
+.educacao-image {
+  flex: 0 0 56%;
+}
+
+.educacao-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.btn-educacao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+
+  padding: .9rem 1.6rem;
+
+  background: #f2c500;
+  color: #111;
+
+  text-decoration: none;
+  font-weight: 600;
+
+  border-radius: 999px;
+
+  transition:
+    background .25s ease,
+    transform .25s ease;
+}
+
+.btn-educacao:hover {
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================
+   PESQUISA
+========================================================== */
+
+.research-section {
+  padding: 5rem 0 6rem;
+}
+
+.research-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+}
+
+.research-text {
+  max-width: 760px;
+}
+
+.research-text h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.1;
+  color: #111;
+}
+
+.research-text p {
+  margin: 0;
+  color: #4f555d;
+  line-height: 1.8;
+}
+
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
+@media (max-width: 992px) {
+
+  .educacao-row {
+    gap: 2rem;
+  }
+
+  .educacao-text {
+    flex-basis: 42%;
+  }
+
+  .educacao-image {
+    flex-basis: 54%;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .educacao-section,
+  .research-section {
+    padding: 3rem 0;
+  }
+
+  .educacao-row,
+  .research-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .educacao-text,
+  .educacao-image,
+  .research-text {
+    flex: initial;
+    width: 100%;
+  }
+
+  .educacao-text {
+    order: 1;
+  }
+
+  .educacao-image {
+    order: 2;
+  }
+
+  .educacao-image img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .research-row .btn-educacao {
+    width: fit-content;
+  }
+
+}

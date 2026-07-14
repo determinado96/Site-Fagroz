@@ -15,7 +15,7 @@ $button_title = $args['button_title'];
         <?php echo esc_html($description); ?>
       </p>
 
-      <a href="#" class="great-college-opportunities__link">
+      <a href="<?php echo site_url('/educacao'); ?>" class="great-college-opportunities__link">
         <span class="great-college-opportunities__link-icon dashicons dashicons-external"></span>
         <span class="great-college-opportunities__link-text">
           <?php echo esc_html($button_title); ?>

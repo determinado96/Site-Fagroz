@@ -1,0 +1,124 @@
+/* ==========================================================
+   EDUCAÇÃO
+========================================================== */
+
+.graduacao-section {
+  padding: 5rem 0;
+}
+
+.graduacao-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.graduacao-text {
+  flex: 0 0 38%;
+}
+
+.graduacao-text h2 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.1;
+  color: #111;
+}
+
+.graduacao-text p {
+  margin: 0 0 2rem;
+  max-width: 42ch;
+  line-height: 1.8;
+  color: #4f555d;
+}
+
+.graduacao-image {
+  flex: 0 0 56%;
+}
+
+.graduacao-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.btn-graduacao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+
+  padding: .9rem 1.6rem;
+
+  background: #f2c500;
+  color: #111;
+
+  text-decoration: none;
+  font-weight: 600;
+
+  border-radius: 999px;
+
+  transition:
+    background .25s ease,
+    transform .25s ease;
+}
+
+.btn-graduacao:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
+@media (max-width: 992px) {
+
+  .graduacao-row {
+    gap: 2rem;
+  }
+
+  .graduacao-text {
+    flex-basis: 42%;
+  }
+
+  .graduacao-image {
+    flex-basis: 54%;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .graduacao-section {
+    padding: 3rem 0;
+  }
+
+  .graduacao-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .graduacao-text,
+  .graduacao-image {
+    flex: initial;
+    width: 100%;
+  }
+
+  .graduacao-text {
+    order: 1;
+  }
+
+  .graduacao-image {
+    order: 2;
+  }
+
+  .graduacao-image img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .btn-graduacao {
+    width: fit-content;
+  }
+
+}
