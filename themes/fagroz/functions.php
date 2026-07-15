@@ -96,6 +96,27 @@ function university_features()
 
 add_action('after_setup_theme', 'university_features');
 
+function university_post_types()
+{
+  // Cria um post type para Destaques do curso de Agronomia
+  register_post_type('agronomy-highlight', array(
+    'show_in_rest' => true,
+    'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
+    'rewrite' => array('slug' => 'agronomy-highlights'),
+    'has_archive' => true,
+    'public' => true,
+    'labels' => array(
+      'name' => 'Destaques do curso de Agronomia',
+      'add_new_item' => 'Adicionar novo destaque do curso de Agronomia',
+      'edit_item' => 'Editar destaque do curso de Agronomia',
+      'all_items' => 'Todos os destaques do curso de Agronomia',
+      'singular_name' => 'Destaque do curso de Agronomia',
+    ),
+  ));
+}
+
+add_action('init', 'university_post_types');
+
 require_once get_theme_file_path('/inc/helpers/category-label.php');
 require_once get_theme_file_path('/inc/queries/news-query.php');
 require_once get_theme_file_path('/inc/queries/home-query.php');
@@ -103,3 +124,60 @@ require_once get_theme_file_path('/inc/queries/single-post-query.php');
 
 // Desativa a barra administrativa no front-end
 add_filter('show_admin_bar', '__return_false');
+
+// Ativa as opções do WYSIWYG (editor visual)
+function fagroz_mce_buttons($buttons)
+{
+  return array(
+    'formatselect',
+    'fontselect',
+    'fontsizeselect',
+    'bold',
+    'italic',
+    'underline',
+    'strikethrough',
+    'forecolor',
+    'backcolor',
+    'bullist',
+    'numlist',
+    'blockquote',
+    'alignleft',
+    'aligncenter',
+    'alignright',
+    'alignjustify',
+    'outdent',
+    'indent',
+    'link',
+    'unlink',
+    'hr',
+    'charmap',
+    'removeformat',
+    'undo',
+    'redo',
+    'pastetext',
+    'fullscreen',
+    'wp_adv',
+  );
+}
+add_filter('mce_buttons', 'fagroz_mce_buttons');
+
+
+function fagroz_mce_buttons_2($buttons)
+{
+  return array(
+    'styleselect',
+
+    'subscript',
+    'superscript',
+    'copy',
+    'cut',
+    'paste',
+    'visualblocks',
+    'visualchars',
+    'searchreplace',
+    'nonbreaking',
+    'spellchecker',
+    'wp_help',
+  );
+}
+add_filter('mce_buttons_2', 'fagroz_mce_buttons_2');

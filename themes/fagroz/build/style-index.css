@@ -2461,5 +2461,105 @@ body.admin-bar .search-overlay {
     width: fit-content;
   }
 }
+/* ==========================================================
+   PAGINA - AGRONOMIA
+========================================================== */
+.page-agronomia__layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.page-agronomia__sidebar {
+  flex: 0 0 260px;
+}
+.page-agronomia__nav {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.page-agronomia__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+}
+.page-agronomia__nav ul li {
+  margin: 0 0 0.6rem 0;
+}
+.page-agronomia__nav ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  color: #4F555D;
+  text-decoration: none;
+  background: #F5F5F5;
+  font-weight: 600;
+}
+.page-agronomia__main {
+  flex: 1 1 auto;
+  max-width: 980px;
+}
+.page-agronomia__intro h1 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  color: #111;
+}
+.page-agronomia__intro p {
+  color: #4F555D;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+.course-highlights {
+  margin-top: 3rem;
+}
+.course-highlights__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.highlight-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+.highlight-card__media img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.highlight-card__content {
+  padding: 1rem;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.6));
+  position: absolute;
+  inset: auto 0 0 0;
+}
+.page-agronomia__stages {
+  margin-top: 3rem;
+}
+.page-agronomia__contact {
+  margin-top: 3rem;
+}
+/* Responsivo */
+@media (max-width: 768px) {
+  .page-agronomia__layout {
+    flex-direction: column;
+  }
+  .page-agronomia__sidebar {
+    order: 2;
+    width: 100%;
+  }
+  .page-agronomia__main {
+    order: 1;
+  }
+  .course-highlights__list {
+    grid-template-columns: 1fr;
+  }
+}
 
 /*# sourceMappingURL=style-index.css.map*/
