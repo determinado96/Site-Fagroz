@@ -23,7 +23,7 @@ if (empty($postgraduate_bg_photo)) {
       <div class="educacao-text">
         <h2><?php echo esc_html($postgraduate_title); ?></h2>
         <p><?php echo esc_html($postgraduate_description); ?></p>
-        <a href="#" class="btn-educacao"><?php echo esc_html($postgraduate_button_title); ?></a>
+        <a href="<?php echo site_url('/pos-graduacao'); ?>" class="btn-educacao"><?php echo esc_html($postgraduate_button_title); ?></a>
       </div>
     </div>
   </div>

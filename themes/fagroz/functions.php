@@ -102,6 +102,7 @@ function university_post_types()
   register_post_type('agronomy-highlight', array(
     'show_in_rest' => true,
     'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
+    'taxonomies' => array('post_tag'),
     'rewrite' => array('slug' => 'agronomy-highlights'),
     'has_archive' => true,
     'public' => true,
@@ -113,6 +114,40 @@ function university_post_types()
       'singular_name' => 'Destaque do curso de Agronomia',
     ),
   ));
+
+  // Cria um post type para Destaques do curso de Zootecnia
+  register_post_type('zootechny-highlight', array(
+    'show_in_rest' => true,
+    'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
+    'taxonomies' => array('post_tag'),
+    'rewrite' => array('slug' => 'zootechny-highlights'),
+    'has_archive' => true,
+    'public' => true,
+    'labels' => array(
+      'name' => 'Destaques do curso de Zootecnia',
+      'add_new_item' => 'Adicionar novo destaque do curso de Zootecnia',
+      'edit_item' => 'Editar destaque do curso de Zootecnia',
+      'all_items' => 'Todos os destaques do curso de Zootecnia',
+      'singular_name' => 'Destaque do curso de Zootecnia',
+    ),
+  ));
+
+  // Cria um post type para Destaques do curso de Pós em Agronegócio
+  register_post_type('agronegocio-dest', array(
+    'show_in_rest' => true,
+    'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
+    'taxonomies' => array('post_tag'),
+    'rewrite' => array('slug' => 'agronegocio-dest'),
+    'has_archive' => true,
+    'public' => true,
+    'labels' => array(
+      'name' => 'Destaques do curso de Agronegócio',
+      'add_new_item' => 'Adicionar novo destaque do curso de Agronegócio',
+      'edit_item' => 'Editar destaque do curso de Agronegócio',
+      'all_items' => 'Todos os destaques do curso de Agronegócio',
+      'singular_name' => 'Destaque do curso de Agronegócio',
+    ),
+  ));
 }
 
 add_action('init', 'university_post_types');
@@ -121,6 +156,9 @@ require_once get_theme_file_path('/inc/helpers/category-label.php');
 require_once get_theme_file_path('/inc/queries/news-query.php');
 require_once get_theme_file_path('/inc/queries/home-query.php');
 require_once get_theme_file_path('/inc/queries/single-post-query.php');
+require_once get_theme_file_path('/inc/queries/agronomy-highlight-query.php');
+require_once get_theme_file_path('/inc/queries/agronegocio-destaques-query.php');
+require_once get_theme_file_path('/inc/queries/zootechny-highlight-query.php');
 
 // Desativa a barra administrativa no front-end
 add_filter('show_admin_bar', '__return_false');

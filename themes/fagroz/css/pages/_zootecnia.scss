@@ -1,0 +1,120 @@
+/* ==========================================================
+   PAGINA - zootecnia
+========================================================== */
+
+.page-zootecnia__layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.page-zootecnia__sidebar {
+  flex: 0 0 260px;
+}
+
+.page-zootecnia__nav {
+  background: $white;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.4rem;
+
+    li {
+      margin: 0 0 0.6rem 0;
+
+      a {
+        display: inline-block;
+        width: 100%;
+        padding: 0.65rem 0.9rem;
+        border-radius: 8px;
+        color: $gray-dark;
+        text-decoration: none;
+        background: $gray-light;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.page-zootecnia__main {
+  flex: 1 1 auto;
+  max-width: 980px;
+}
+
+.page-zootecnia__intro h1 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  color: #111;
+}
+
+.page-zootecnia__intro p {
+  color: $gray-dark;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+
+.course-highlights {
+  margin-top: 3rem;
+}
+
+.course-highlights__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.highlight-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: $white;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  position: relative;
+
+  &__media img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: 1rem;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
+    position: absolute;
+    inset: auto 0 0 0;
+  }
+}
+
+.page-zootecnia__stages {
+  margin-top: 3rem;
+}
+
+.page-zootecnia__contact {
+  margin-top: 3rem;
+}
+
+/* Responsivo */
+@media (max-width: $breakpoint-md) {
+  .page-zootecnia__layout {
+    flex-direction: column;
+  }
+
+  .page-zootecnia__sidebar {
+    order: 2;
+    width: 100%;
+  }
+
+  .page-zootecnia__main {
+    order: 1;
+  }
+
+  .course-highlights__list {
+    grid-template-columns: 1fr;
+  }
+}

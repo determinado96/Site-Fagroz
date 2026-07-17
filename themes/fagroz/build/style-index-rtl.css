@@ -2462,6 +2462,200 @@ body.admin-bar .search-overlay {
   }
 }
 /* ==========================================================
+   PÓS-GRADUAÇÃO
+========================================================= */
+.postgraduate-section {
+  padding: 5rem 0;
+}
+.postgraduate-section--programs {
+  background: #fafafa;
+}
+.postgraduate-programs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+.postgraduate-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.postgraduate-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.12);
+}
+.postgraduate-card:hover .postgraduate-card__image img {
+  transform: scale(1.05);
+}
+.postgraduate-card__image {
+  overflow: hidden;
+  background: #e0e0e0;
+}
+.postgraduate-card__image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.postgraduate-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  flex-grow: 1;
+}
+.postgraduate-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.postgraduate-card__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: rgba(242, 197, 0, 0.12);
+  color: #4f555d;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.postgraduate-card__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1.2;
+  color: #111111;
+  font-weight: 700;
+}
+.postgraduate-card__description {
+  margin: 0;
+  color: #4f555d;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+.btn-postgraduate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  background: #f2c500;
+  color: #111111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.25s ease, background 0.25s ease;
+  border: 2px solid transparent;
+}
+.btn-postgraduate:hover {
+  transform: translateY(-2px);
+  background: #e0b400;
+}
+.btn-postgraduate:active {
+  transform: translateY(0);
+}
+.postgraduate-callout {
+  background: linear-gradient(-135deg, #7f5f51 0%, #5f4339 100%);
+  border-radius: 32px;
+  color: #ffffff;
+  overflow: hidden;
+}
+.postgraduate-callout__inner {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.2fr) minmax(320px, 1fr);
+  gap: 3rem;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+.postgraduate-callout__hero h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.75rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+.postgraduate-callout__copy p {
+  margin: 0;
+  line-height: 1.8;
+  max-width: 56ch;
+  font-size: 1.05rem;
+}
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+@media (max-width: 1024px) {
+  .postgraduate-programs__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .postgraduate-callout__inner {
+    gap: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .postgraduate-section {
+    padding: 3rem 0;
+  }
+  .postgraduate-section--programs {
+    padding: 2.5rem 0;
+  }
+  .postgraduate-programs__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .postgraduate-callout__inner {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+  }
+  .postgraduate-callout__hero h2 {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+  .postgraduate-card__body {
+    padding: 1.5rem;
+  }
+  .postgraduate-card__title {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+}
+@media (max-width: 480px) {
+  .postgraduate-section {
+    padding: 2rem 0;
+  }
+  .postgraduate-section--programs {
+    padding: 1.5rem 0;
+  }
+  .postgraduate-programs__grid {
+    gap: 1rem;
+  }
+  .postgraduate-card__body {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .postgraduate-card__label {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  .postgraduate-card__description {
+    font-size: 0.9rem;
+  }
+  .btn-postgraduate {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .postgraduate-callout__inner {
+    padding: 2rem 1rem;
+  }
+  .postgraduate-callout__copy p {
+    font-size: 0.95rem;
+  }
+}
+/* ==========================================================
    PAGINA - AGRONOMIA
 ========================================================== */
 .page-agronomia__layout {
@@ -2559,5 +2753,767 @@ body.admin-bar .search-overlay {
   }
   .course-highlights__list {
     grid-template-columns: 1fr;
+  }
+}
+/* ==========================================================
+   PAGINA - zootecnia
+========================================================== */
+.page-zootecnia__layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.page-zootecnia__sidebar {
+  flex: 0 0 260px;
+}
+.page-zootecnia__nav {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.page-zootecnia__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+}
+.page-zootecnia__nav ul li {
+  margin: 0 0 0.6rem 0;
+}
+.page-zootecnia__nav ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  color: #4F555D;
+  text-decoration: none;
+  background: #F5F5F5;
+  font-weight: 600;
+}
+.page-zootecnia__main {
+  flex: 1 1 auto;
+  max-width: 980px;
+}
+.page-zootecnia__intro h1 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  color: #111;
+}
+.page-zootecnia__intro p {
+  color: #4F555D;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+.course-highlights {
+  margin-top: 3rem;
+}
+.course-highlights__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.highlight-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+.highlight-card__media img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.highlight-card__content {
+  padding: 1rem;
+  color: #fff;
+  background: linear-gradient(-180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.6));
+  position: absolute;
+  inset: auto 0 0 0;
+}
+.page-zootecnia__stages {
+  margin-top: 3rem;
+}
+.page-zootecnia__contact {
+  margin-top: 3rem;
+}
+/* Responsivo */
+@media (max-width: 768px) {
+  .page-zootecnia__layout {
+    flex-direction: column;
+  }
+  .page-zootecnia__sidebar {
+    order: 2;
+    width: 100%;
+  }
+  .page-zootecnia__main {
+    order: 1;
+  }
+  .course-highlights__list {
+    grid-template-columns: 1fr;
+  }
+}
+/* ==========================================================
+   PAGINA - ciencia-do-solo
+========================================================== */
+.page-ciencia-do-solo__layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.page-ciencia-do-solo__sidebar {
+  flex: 0 0 260px;
+}
+.page-ciencia-do-solo__nav {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.page-ciencia-do-solo__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+}
+.page-ciencia-do-solo__nav ul li {
+  margin: 0 0 0.6rem 0;
+}
+.page-ciencia-do-solo__nav ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  color: #4F555D;
+  text-decoration: none;
+  background: #F5F5F5;
+  font-weight: 600;
+}
+.page-ciencia-do-solo__main {
+  flex: 1 1 auto;
+  max-width: 980px;
+}
+.page-ciencia-do-solo__intro h1 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  color: #111;
+}
+.page-ciencia-do-solo__intro p {
+  color: #4F555D;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+.course-highlights {
+  margin-top: 3rem;
+}
+.course-highlights__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.highlight-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+.highlight-card__media img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.highlight-card__content {
+  padding: 1rem;
+  color: #fff;
+  background: linear-gradient(-180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.6));
+  position: absolute;
+  inset: auto 0 0 0;
+}
+.page-ciencia-do-solo__stages {
+  margin-top: 3rem;
+}
+.page-ciencia-do-solo__contact {
+  margin-top: 3rem;
+}
+/* Responsivo */
+@media (max-width: 768px) {
+  .page-ciencia-do-solo__layout {
+    flex-direction: column;
+  }
+  .page-ciencia-do-solo__sidebar {
+    order: 2;
+    width: 100%;
+  }
+  .page-ciencia-do-solo__main {
+    order: 1;
+  }
+  .course-highlights__list {
+    grid-template-columns: 1fr;
+  }
+}
+/* ==========================================================
+   PAGINA - agronegocio
+========================================================== */
+.page-agronegocio__layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.page-agronegocio__sidebar {
+  flex: 0 0 260px;
+}
+.page-agronegocio__nav {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.page-agronegocio__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+}
+.page-agronegocio__nav ul li {
+  margin: 0 0 0.6rem 0;
+}
+.page-agronegocio__nav ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  color: #4F555D;
+  text-decoration: none;
+  background: #F5F5F5;
+  font-weight: 600;
+}
+.page-agronegocio__main {
+  flex: 1 1 auto;
+  max-width: 980px;
+}
+.page-agronegocio__intro h1 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  color: #111;
+}
+.page-agronegocio__intro p {
+  color: #4F555D;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+.course-highlights {
+  margin-top: 3rem;
+}
+.course-highlights__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.highlight-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+.highlight-card__media img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.highlight-card__content {
+  padding: 1rem;
+  color: #fff;
+  background: linear-gradient(-180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.6));
+  position: absolute;
+  inset: auto 0 0 0;
+}
+.page-agronegocio__stages {
+  margin-top: 3rem;
+}
+.page-agronegocio__contact {
+  margin-top: 3rem;
+}
+/* Responsivo */
+@media (max-width: 768px) {
+  .page-agronegocio__layout {
+    flex-direction: column;
+  }
+  .page-agronegocio__sidebar {
+    order: 2;
+    width: 100%;
+  }
+  .page-agronegocio__main {
+    order: 1;
+  }
+  .course-highlights__list {
+    grid-template-columns: 1fr;
+  }
+}
+.archive-agronomy-highlights {
+  padding: 4rem 0 5rem;
+}
+.archive-agronomy-highlights__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.archive-agronomy-highlights__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.archive-agronomy-highlights__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 4.2vw, 4.8rem);
+  line-height: 0.95;
+  color: #482200;
+  margin: 0;
+  max-width: 12ch;
+}
+.archive-agronomy-highlights__controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: min(100%, 720px);
+}
+.archive-agronomy-highlights__filter {
+  min-width: 190px;
+  flex: 1 1 190px;
+}
+.archive-agronomy-highlights__filter label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  color: #482200;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.archive-agronomy-highlights__filter select {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #F5F5F5;
+  background: #FFFFFF;
+  color: #482200;
+  appearance: none;
+  font-size: 0.95rem;
+}
+.archive-agronomy-highlights__search {
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+.archive-agronomy-highlights__search input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #F5F5F5;
+  background: #FFFFFF;
+  color: #482200;
+  font-size: 0.95rem;
+  outline: none;
+}
+.archive-agronomy-highlights__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.archive-agronomy-highlights__card {
+  position: relative;
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: #4F555D;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.archive-agronomy-highlights__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.78));
+  z-index: 1;
+  pointer-events: none;
+}
+.archive-agronomy-highlights__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.22);
+}
+.archive-agronomy-highlights__card > * {
+  position: relative;
+  z-index: 2;
+}
+.archive-agronomy-highlights__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+.archive-agronomy-highlights__label, .archive-agronomy-highlights__date-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.archive-agronomy-highlights__label {
+  background: rgba(255, 255, 255, 0.94);
+  color: #482200;
+}
+.archive-agronomy-highlights__date-pill {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+}
+.archive-agronomy-highlights__card-title {
+  margin: 0 0 1rem;
+  color: #FFFFFF;
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 13ch;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+.archive-agronomy-highlights__card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.archive-agronomy-highlights__card-excerpt {
+  margin: 0 0 1.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-size: 0.98rem;
+  max-width: 40rem;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.15);
+}
+.archive-agronomy-highlights__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.98);
+  color: #482200;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.archive-agronomy-highlights__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.15);
+}
+.archive-agronomy-highlights__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.archive-agronomy-highlights__pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  padding: 0.7rem 0.95rem;
+  margin: 0 0.25rem;
+  border-radius: 999px;
+  color: #482200;
+  text-decoration: none;
+  font-weight: 700;
+  background: #F5F5F5;
+}
+.archive-agronomy-highlights__pagination .page-numbers.current {
+  background: #482200;
+  color: #FFFFFF;
+}
+@media (max-width: 768px) {
+  .archive-agronomy-highlights {
+    padding: 3.5rem 0 3rem;
+  }
+  .archive-agronomy-highlights__header {
+    align-items: flex-start;
+  }
+  .archive-agronomy-highlights__grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 576px) {
+  .archive-agronomy-highlights {
+    padding: 3rem 0 2.5rem;
+  }
+  .archive-agronomy-highlights__header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .archive-agronomy-highlights__controls {
+    flex-direction: column;
+    width: 100%;
+  }
+  .archive-agronomy-highlights__filter, .archive-agronomy-highlights__search {
+    min-width: auto;
+  }
+  .archive-agronomy-highlights__card {
+    min-height: 360px;
+    padding: 1.5rem;
+  }
+  .archive-agronomy-highlights__card-top {
+    margin-bottom: 1.25rem;
+  }
+  .archive-agronomy-highlights__card-title {
+    font-size: 2rem;
+  }
+}
+.archive-zootechny-highlights {
+  padding: 4rem 0 5rem;
+}
+.archive-zootechny-highlights__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.archive-zootechny-highlights__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.archive-zootechny-highlights__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 4.2vw, 4.8rem);
+  line-height: 0.95;
+  color: #482200;
+  margin: 0;
+  max-width: 12ch;
+}
+.archive-zootechny-highlights__controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: min(100%, 720px);
+}
+.archive-zootechny-highlights__filter {
+  min-width: 190px;
+  flex: 1 1 190px;
+}
+.archive-zootechny-highlights__filter label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  color: #482200;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.archive-zootechny-highlights__filter select {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #F5F5F5;
+  background: #FFFFFF;
+  color: #482200;
+  appearance: none;
+  font-size: 0.95rem;
+}
+.archive-zootechny-highlights__search {
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+.archive-zootechny-highlights__search input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #F5F5F5;
+  background: #FFFFFF;
+  color: #482200;
+  font-size: 0.95rem;
+  outline: none;
+}
+.archive-zootechny-highlights__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.archive-zootechny-highlights__card {
+  position: relative;
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: #4F555D;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.archive-zootechny-highlights__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.78));
+  z-index: 1;
+  pointer-events: none;
+}
+.archive-zootechny-highlights__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.22);
+}
+.archive-zootechny-highlights__card > * {
+  position: relative;
+  z-index: 2;
+}
+.archive-zootechny-highlights__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+.archive-zootechny-highlights__label, .archive-zootechny-highlights__date-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.archive-zootechny-highlights__label {
+  background: rgba(255, 255, 255, 0.94);
+  color: #482200;
+}
+.archive-zootechny-highlights__date-pill {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+}
+.archive-zootechny-highlights__card-title {
+  margin: 0 0 1rem;
+  color: #FFFFFF;
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 13ch;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+.archive-zootechny-highlights__card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.archive-zootechny-highlights__card-excerpt {
+  margin: 0 0 1.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-size: 0.98rem;
+  max-width: 40rem;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.15);
+}
+.archive-zootechny-highlights__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.98);
+  color: #482200;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.archive-zootechny-highlights__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.15);
+}
+.archive-zootechny-highlights__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.archive-zootechny-highlights__pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  padding: 0.7rem 0.95rem;
+  margin: 0 0.25rem;
+  border-radius: 999px;
+  color: #482200;
+  text-decoration: none;
+  font-weight: 700;
+  background: #F5F5F5;
+}
+.archive-zootechny-highlights__pagination .page-numbers.current {
+  background: #482200;
+  color: #FFFFFF;
+}
+@media (max-width: 768px) {
+  .archive-zootechny-highlights {
+    padding: 3.5rem 0 3rem;
+  }
+  .archive-zootechny-highlights__header {
+    align-items: flex-start;
+  }
+  .archive-zootechny-highlights__grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 576px) {
+  .archive-zootechny-highlights {
+    padding: 3rem 0 2.5rem;
+  }
+  .archive-zootechny-highlights__header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .archive-zootechny-highlights__controls {
+    flex-direction: column;
+    width: 100%;
+  }
+  .archive-zootechny-highlights__filter, .archive-zootechny-highlights__search {
+    min-width: auto;
+  }
+  .archive-zootechny-highlights__card {
+    min-height: 360px;
+    padding: 1.5rem;
+  }
+  .archive-zootechny-highlights__card-top {
+    margin-bottom: 1.25rem;
+  }
+  .archive-zootechny-highlights__card-title {
+    font-size: 2rem;
   }
 }

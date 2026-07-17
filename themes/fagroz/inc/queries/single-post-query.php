@@ -1,10 +1,35 @@
 <?php
 
+if (!function_exists('fagroz_get_the_tags')) {
+  function fagroz_get_the_tags(int $post_id = 0): array
+  {
+    $post_id = $post_id ?: get_the_ID();
+
+    if (empty($post_id)) {
+      return [];
+    }
+
+    if (get_post_type($post_id) === 'agronomy-highlight') {
+      $tags = get_the_terms($post_id, 'post_tag');
+
+      if (is_wp_error($tags) || empty($tags)) {
+        return [];
+      }
+
+      return array_values($tags);
+    }
+
+    $tags = get_the_tags($post_id);
+
+    return is_array($tags) ? $tags : [];
+  }
+}
+
 if (!function_exists('fagroz_get_related_posts')) {
-  function fagroz_get_related_posts(int $post_id, array $tag_ids = []): array
+  function fagroz_get_related_posts(int $post_id, array $tag_ids = [], string $post_type = 'post'): array
   {
     $query_args = [
-      'post_type' => 'post',
+      'post_type' => $post_type,
       'posts_per_page' => 2,
       'post__not_in' => [$post_id],
       'ignore_sticky_posts' => true,
@@ -21,7 +46,7 @@ if (!function_exists('fagroz_get_related_posts')) {
 
     if (!empty($tag_ids) && !$related_query->have_posts()) {
       $fallback_args = [
-        'post_type' => 'post',
+        'post_type' => $post_type,
         'posts_per_page' => 2,
         'post__not_in' => [$post_id],
         'ignore_sticky_posts' => true,
