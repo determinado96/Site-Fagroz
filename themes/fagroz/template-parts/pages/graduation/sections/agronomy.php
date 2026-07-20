@@ -1,16 +1,13 @@
 <?php
-$acf_agronomy = get_field('agronomy');
-
-$title = $acf_agronomy['title']  ?? 'Bacharel em Agronomia';
-$description = $acf_agronomy['description']  ?? 'O Curso de Agronomia da UFRGS forma profissionais capacitados para atuar em toda a cadeia produtiva agropecuária, com sólida base científica nas áreas de solos, fitotecnia, fitossanidade, zootecnia e gestão. A formação prepara o aluno para os desafios da agricultura sustentável e do agronegócio.';
-$bg_photo = $acf_agronomy['bg_photo'] ?? null;
-$button_title = $acf_agronomy['button_title'] ?? 'Ver mais';
-
+$acfAgronomyGraduation = get_field('agronomy_graduation');
+$title = $acfAgronomyGraduation['title'] ?? get_the_title();
+$description = $acfAgronomyGraduation['description'] ?? '';
+$bg_photo = $acfAgronomyGraduation['bg_photo'] ?? '';
 if (is_array($bg_photo)) {
   $bg_photo = $bg_photo['url'] ?? '';
 }
 if (empty($bg_photo)) {
-  $bg_photo = get_template_directory_uri() . '/images/Página - Graduação/default_agronomia_graduacao.png';
+  $bg_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
 }
 ?>
 
@@ -19,8 +16,8 @@ if (empty($bg_photo)) {
     <div class="graduacao-row">
       <div class="graduacao-text">
         <h2><?php echo esc_html($title); ?></h2>
-        <p><?php echo esc_html($description); ?></p>
-        <a href="<?php echo site_url('/agronomia'); ?>" class="btn-graduacao"><?php echo esc_html($button_title); ?></a>
+        <p><?php echo wp_kses_post($description); ?></p>
+        <a href="<?php echo site_url('/agronomia'); ?>" class="btn-graduacao">Ver mais</a>
       </div>
       <div class="graduacao-image">
         <img src="<?php echo esc_url($bg_photo); ?>" alt="Graduação" />

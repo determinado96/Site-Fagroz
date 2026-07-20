@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Arquivo principal de funções do tema.
+ * Este arquivo reúne as configurações que tornam o WordPress mais personalizado.
+ */
+
+// --- 1. Estrutura do menu mega ---
 class Fagroz_Mega_Menu_Walker extends Walker_Nav_Menu
 {
   function start_lvl(&$output, $depth = 0, $args = null)
@@ -58,7 +64,8 @@ class Fagroz_Mega_Menu_Walker extends Walker_Nav_Menu
   }
 }
 
-// End-point personalizado
+// --- 2. Endpoints personalizados da API REST ---
+// Este bloco cria uma busca customizada para retornar resultados em formato simples.
 function universitySearchResults($data)
 {
   $mainQuery = new WP_Query(array(
@@ -107,6 +114,8 @@ function university_custom_rest()
 
 add_action('rest_api_init', 'university_custom_rest');
 
+// --- 3. Recursos e assets do tema (CSS/JS) ---
+// Aqui são carregados os arquivos de estilo e script usados no site.
 function load_theme_resources()
 {
   wp_enqueue_script('load-fagroz-js', get_theme_file_uri('/build/index.js'), array('jquery', 'swiper-js'), '1.0', true);
@@ -135,6 +144,8 @@ function load_theme_resources()
 
 add_action('wp_enqueue_scripts', 'load_theme_resources');
 
+// --- 4. Configurações básicas do tema ---
+// Define menus, suporte a títulos e imagens destacadas.
 function university_features()
 {
   register_nav_menu('headerMenuLocation', 'Header Menu Location');
@@ -145,6 +156,40 @@ function university_features()
 
 add_action('after_setup_theme', 'university_features');
 
+// --- 5. Personalização do painel administrativo ---
+// Altera nomes e rótulos do painel para deixar o WordPress mais adequado ao tema.
+function fagroz_rename_posts()
+{
+  global $menu, $submenu, $wp_post_types;
+
+  // Altera os labels do post type "post"
+  $labels = &$wp_post_types['post']->labels;
+
+  $labels->name = 'Notícias';
+  $labels->singular_name = 'Notícia';
+  $labels->add_new = 'Adicionar';
+  $labels->add_new_item = 'Adicionar Notícia';
+  $labels->edit_item = 'Editar Notícia';
+  $labels->new_item = 'Nova Notícia';
+  $labels->view_item = 'Ver Notícia';
+  $labels->search_items = 'Buscar Notícias';
+  $labels->not_found = 'Nenhuma notícia encontrada';
+  $labels->not_found_in_trash = 'Nenhuma notícia encontrada na lixeira';
+  $labels->all_items = 'Todas as Notícias';
+  $labels->menu_name = 'Notícias';
+  $labels->name_admin_bar = 'Notícia';
+
+  // Renomeia o menu do painel
+  $menu[5][0] = 'Notícias';
+  $submenu['edit.php'][5][0] = 'Todas as Notícias';
+  $submenu['edit.php'][10][0] = 'Adicionar Notícia';
+}
+
+add_action('init', 'fagroz_rename_posts');
+add_action('admin_menu', 'fagroz_rename_posts');
+
+// --- 6. Tipos de conteúdo personalizados ---
+// Cria conteúdos especiais para cada curso, como destaques e páginas específicas.
 function university_post_types()
 {
   // Cria um post type para Destaques do curso de Agronomia
@@ -202,18 +247,21 @@ function university_post_types()
 
 add_action('init', 'university_post_types');
 
+// --- 7. Arquivos auxiliares do tema ---
+// Aqui são incluídos arquivos menores com funções extras para organizar melhor o projeto.
 require_once get_theme_file_path('/inc/helpers/category-label.php');
 require_once get_theme_file_path('/inc/queries/news-query.php');
-require_once get_theme_file_path('/inc/queries/home-query.php');
+require_once get_theme_file_path('/inc/queries/repo-home.php');
 require_once get_theme_file_path('/inc/queries/single-post-query.php');
-require_once get_theme_file_path('/inc/queries/agronomy-highlight-query.php');
+require_once get_theme_file_path('/inc/queries/repo-agronomy.php');
 require_once get_theme_file_path('/inc/queries/agribusiness-hl-query.php');
-require_once get_theme_file_path('/inc/queries/zootechny-highlight-query.php');
+require_once get_theme_file_path('/inc/queries/repo-zootechny.php');
 
-// Desativa a barra administrativa no front-end
+// --- 8. Ajustes do editor visual e do painel ---
+// Remove a barra administrativa na parte pública do site.
 add_filter('show_admin_bar', '__return_false');
 
-// Ativa as opções do WYSIWYG (editor visual)
+// Ativa opções extras no editor visual do WordPress.
 function fagroz_mce_buttons($buttons)
 {
   return array(
@@ -271,10 +319,8 @@ function fagroz_mce_buttons_2($buttons)
 
 add_filter('mce_buttons_2', 'fagroz_mce_buttons_2');
 
-/**
- * Remove páginas das buscas e listagens,
- * mantendo acesso direto via URL.
- */
+// --- 9. Ajustes de busca e listagens ---
+// Remove páginas de determinadas consultas para mostrar apenas os conteúdos desejados.
 function fagroz_excluir_pages_das_consultas($query)
 {
 

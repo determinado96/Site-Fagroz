@@ -1,27 +1,25 @@
-<!--
-  Template padrão (fallback)
-  Quando nenhum outro template mais específico existe
+<!-- 
+  Ordem para chegar nesse arquivo:
+  single-post.php          ← Post padrão
+  single-professor.php     ← CPT professor
+  single-curso.php         ← CPT curso
+  single.php               ← Fallback
+  singular.php             ← Fallback ainda mais genérico
+  *index.php               ← Último recurso
 -->
 <?php
 get_header();
-?>
-<div class="container container--narrow page-section">
-  <?php
-  while (have_posts()) {
-    the_post(); ?>
-    <div class="post-item">
-      <h2 class="headline headline--medium headline--post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-      <div class="metabox">
-        <p>Posted by <?php the_author_posts_link(); ?> on <?php the_time('n.j.y'); ?> in <?php echo get_the_category_list(', '); ?></p>
-      </div>
-      <div class="generic-content">
-        <?php the_excerpt(); ?>
-        <p><a class="btn btn--blue" href="<?php the_permalink(); ?>">Continue reading &raquo;</a></p>
-      </div>
-    </div>
-  <?php }
-  echo paginate_links();
-  ?>
-</div>
-<?php get_footer();
+if (have_posts()) :
+  while (have_posts()) :
+    the_post();
+
+    get_template_part(
+      'template-parts/content',
+      get_post_type()
+    );
+  endwhile;
+else :
+  get_template_part('template-parts/content', 'none');
+endif;
+get_footer();
 ?>

@@ -1,48 +1,43 @@
+<!--
+  Exibe qualquer página estática que não tenha um template especifico
+  Ordem para chegar nesse arquivo:
+  page-{slug}.php
+  *page.php
+  singular.php
+  index.php
+-->
 <?php
-$acf_hero_image = get_field('hero_image');
-$hero_title =
-  !empty($acf_hero_image['title'])
-  ? $acf_hero_image['title']
-  : 'Agronomia';
-$hero_bg_photo = $acf_hero_image['bg_photo'] ?? null;
-
-if (is_array($hero_bg_photo)) {
-  $hero_bg_photo = $hero_bg_photo['url'] ?? '';
+$acfHeroImage = get_field('hero_image');
+$title = $acfHeroImage['title'] ?: get_the_title();
+$bg_photo = $acfHeroImage['bg_photo'] ?? '';
+if (is_array($bg_photo)) {
+  $bg_photo = $bg_photo['url'] ?? '';
 }
-if (empty($hero_bg_photo)) {
-  $hero_bg_photo = get_template_directory_uri() . '/images/Página - Agronomia/default_hero_image.png';
+if (empty($bg_photo)) {
+  $bg_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
 }
 ?>
-
 <?php get_header(); ?>
-
 <?php
 get_template_part(
-  'template-parts/components/hero/hero-image',
+  'template-parts/components/hero/post-hero-image',
   null,
   [
-    'title' => $hero_title,
-    'image' => $hero_bg_photo,
-    'text_position' => 'center',
+    'title' => $title,
+    'image' => $bg_photo,
   ]
 );
 ?>
-
 <section class="section page-agronomia">
   <div class="container page-agronomia__layout">
     <?php get_template_part('template-parts/pages/agronomy/sections/sidebar'); ?>
-
     <main class="page-agronomia__main">
       <?php get_template_part('template-parts/pages/agronomy/sections/introduction'); ?>
-
       <?php get_template_part('template-parts/pages/agronomy/sections/highlights'); ?>
-
       <?php get_template_part('template-parts/pages/agronomy/sections/stages'); ?>
-
       <?php get_template_part('template-parts/pages/agronomy/sections/contact'); ?>
     </main>
   </div>
 </section>
-
 <?php
 ?>

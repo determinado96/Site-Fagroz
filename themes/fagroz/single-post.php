@@ -10,10 +10,9 @@
 get_header();
 while (have_posts()) :
   the_post();
-  $acfNews = get_field('news') ?: [];
-  $heroImage = $acfNews['hero_image'] ?? [];
-  $title = !empty($heroImage['title']) ? $heroImage['title'] : get_the_title();
-  $bg_photo = $heroImage['bg_photo'] ?? '';
+  $acfHeroImage = get_field('hero_image');
+  $title = $acfHeroImage['title'] ?: get_the_title();
+  $bg_photo = $acfHeroImage['bg_photo'] ?? '';
   if (is_array($bg_photo)) {
     $bg_photo = $bg_photo['url'] ?? '';
   }

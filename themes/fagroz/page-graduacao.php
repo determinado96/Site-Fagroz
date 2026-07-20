@@ -1,32 +1,33 @@
+<!--
+  Exibe qualquer página estática que não tenha um template especifico
+  Ordem para chegar nesse arquivo:
+  page-{slug}.php
+  *page.php
+  singular.php
+  index.php
+-->
 <?php
-$acf_hero_image = get_field('hero_image');
-
-$hero_title  = $acf_hero_image['title']  ?? 'Explore nossas opções de Graduação';
-$hero_bg_photo = $acf_hero_image['bg_photo'] ?? null;
-
-if (is_array($hero_bg_photo)) {
-  $hero_bg_photo = $hero_bg_photo['url'] ?? '';
+$acfHeroImage = get_field('hero_image');
+$title = $acfHeroImage['title'] ?: get_the_title();
+$bg_photo = $acfHeroImage['bg_photo'] ?? '';
+if (is_array($bg_photo)) {
+  $bg_photo = $bg_photo['url'] ?? '';
 }
-if (empty($hero_bg_photo)) {
-  $hero_bg_photo = get_template_directory_uri() . '/images/Página - Graduação/default_hero_image.jpg';
+if (empty($bg_photo)) {
+  $bg_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
 }
 ?>
-
 <?php get_header(); ?>
-
 <?php
 get_template_part(
-  'template-parts/components/hero/hero-image',
+  'template-parts/components/hero/post-hero-image',
   null,
   [
-    'title' => $hero_title,
-    'image' => $hero_bg_photo,
+    'title' => $title,
+    'image' => $bg_photo,
   ]
 );
 ?>
-
 <?php get_template_part('template-parts/pages/graduation/sections/agronomy'); ?>
-
 <?php get_template_part('template-parts/pages/graduation/sections/zootechnics'); ?>
-
 <?php get_footer(); ?>

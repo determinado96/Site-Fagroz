@@ -12,6 +12,7 @@
 
 $title = $args['title'] ?? '';
 $image = $args['image'] ?? '';
+$textPosition = $args['text_position'] ?? 'bottom-left';
 
 if (empty($image)) {
   return;
@@ -23,5 +24,6 @@ get_template_part(
   [
     'title' => $title,
     'image' => $image,
+    'text_position' => $textPosition,
   ]
 );
