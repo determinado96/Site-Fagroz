@@ -58,6 +58,55 @@ class Fagroz_Mega_Menu_Walker extends Walker_Nav_Menu
   }
 }
 
+// End-point personalizado
+function universitySearchResults($data)
+{
+  $mainQuery = new WP_Query(array(
+    'post_type' => 'any',
+    's' => sanitize_text_field($data['term']),
+    'posts_per_page' => -1
+  ));
+
+  $results = array();
+
+  while ($mainQuery->have_posts()) {
+    $mainQuery->the_post();
+
+    $results[] = array(
+      'title' => get_the_title(),
+      'link'  => get_permalink(),
+      'type'  => get_post_type(),
+      'typeLabel' => get_post_type_object(get_post_type())->labels->singular_name,
+      'author' => get_the_author()
+    );
+  }
+
+  wp_reset_postdata();
+
+  return $results;
+}
+
+add_action('rest_api_init', function () {
+  register_rest_route('university/v1', 'search', array(
+    'methods'  => WP_REST_Server::READABLE,
+    'callback' => 'universitySearchResults'
+  ));
+});
+
+function university_custom_rest()
+{
+  // Tipo de conteúdo que desejamos modificar
+  // Nome do campo
+  // Callback
+  register_rest_field('post', 'authorName', array(
+    'get_callback' => function () {
+      return get_the_author();
+    }
+  ));
+}
+
+add_action('rest_api_init', 'university_custom_rest');
+
 function load_theme_resources()
 {
   wp_enqueue_script('load-fagroz-js', get_theme_file_uri('/build/index.js'), array('jquery', 'swiper-js'), '1.0', true);
@@ -79,7 +128,7 @@ function load_theme_resources()
   wp_enqueue_style('dashicons');
   wp_enqueue_style('fagroz_styles', get_theme_file_uri('/build/style-index.css'));
   wp_enqueue_style('fagroz_extra_styles', get_theme_file_uri('/build/index.css'));
-  wp_localize_script('main-university-js', 'universityData', array(
+  wp_localize_script('load-fagroz-js', 'universityData', array(
     'root_url' => get_site_url(),
   ));
 }
@@ -100,6 +149,7 @@ function university_post_types()
 {
   // Cria um post type para Destaques do curso de Agronomia
   register_post_type('agronomy-highlight', array(
+    // Mostra no retorno do json da api de posts
     'show_in_rest' => true,
     'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
     'taxonomies' => array('post_tag'),
@@ -107,7 +157,7 @@ function university_post_types()
     'has_archive' => true,
     'public' => true,
     'labels' => array(
-      'name' => 'Destaques do curso de Agronomia',
+      'name' => 'Destaques da Graduação de Agronomia',
       'add_new_item' => 'Adicionar novo destaque do curso de Agronomia',
       'edit_item' => 'Editar destaque do curso de Agronomia',
       'all_items' => 'Todos os destaques do curso de Agronomia',
@@ -124,7 +174,7 @@ function university_post_types()
     'has_archive' => true,
     'public' => true,
     'labels' => array(
-      'name' => 'Destaques do curso de Zootecnia',
+      'name' => 'Destaques da Graduação de Zootecnia',
       'add_new_item' => 'Adicionar novo destaque do curso de Zootecnia',
       'edit_item' => 'Editar destaque do curso de Zootecnia',
       'all_items' => 'Todos os destaques do curso de Zootecnia',
@@ -133,15 +183,15 @@ function university_post_types()
   ));
 
   // Cria um post type para Destaques do curso de Pós em Agronegócio
-  register_post_type('agronegocio-dest', array(
+  register_post_type('agribusiness-hl', array(
     'show_in_rest' => true,
     'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
     'taxonomies' => array('post_tag'),
-    'rewrite' => array('slug' => 'agronegocio-dest'),
+    'rewrite' => array('slug' => 'agribusiness-hl'),
     'has_archive' => true,
     'public' => true,
     'labels' => array(
-      'name' => 'Destaques do curso de Agronegócio',
+      'name' => 'Destaques da Pós-Graduação em Agronegócio',
       'add_new_item' => 'Adicionar novo destaque do curso de Agronegócio',
       'edit_item' => 'Editar destaque do curso de Agronegócio',
       'all_items' => 'Todos os destaques do curso de Agronegócio',
@@ -157,7 +207,7 @@ require_once get_theme_file_path('/inc/queries/news-query.php');
 require_once get_theme_file_path('/inc/queries/home-query.php');
 require_once get_theme_file_path('/inc/queries/single-post-query.php');
 require_once get_theme_file_path('/inc/queries/agronomy-highlight-query.php');
-require_once get_theme_file_path('/inc/queries/agronegocio-destaques-query.php');
+require_once get_theme_file_path('/inc/queries/agribusiness-hl-query.php');
 require_once get_theme_file_path('/inc/queries/zootechny-highlight-query.php');
 
 // Desativa a barra administrativa no front-end
@@ -218,4 +268,69 @@ function fagroz_mce_buttons_2($buttons)
     'wp_help',
   );
 }
+
 add_filter('mce_buttons_2', 'fagroz_mce_buttons_2');
+
+/**
+ * Remove páginas das buscas e listagens,
+ * mantendo acesso direto via URL.
+ */
+function fagroz_excluir_pages_das_consultas($query)
+{
+
+  // Não executa no painel administrativo
+  if (is_admin()) {
+    return;
+  }
+
+  // Apenas consulta principal
+  if (!$query->is_main_query()) {
+    return;
+  }
+
+
+  /**
+   * Remove páginas da busca
+   */
+  if ($query->is_search()) {
+
+    $query->set('post_type', [
+      'post',
+      'agribusiness-hl',
+      'zootechny-highlight',
+      'agronomy-highlight',
+    ]);
+  }
+
+
+  /**
+   * Remove páginas dos arquivos
+   */
+  if ($query->is_archive()) {
+
+    $query->set('post_type', [
+      'post',
+      'noticia',
+      'professor',
+      'curso',
+      'nucleo'
+    ]);
+  }
+
+
+  /**
+   * Remove páginas da página de posts
+   */
+  if ($query->is_home()) {
+
+    $query->set('post_type', [
+      'post',
+      'noticia',
+      'professor',
+      'curso',
+      'nucleo'
+    ]);
+  }
+}
+
+add_action('pre_get_posts', 'fagroz_excluir_pages_das_consultas');

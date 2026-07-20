@@ -177,23 +177,29 @@ class Search {
     this.previousValue = this.searchField.val();
   }
   getResults() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(universityData.root_url + "/wp-json/wp/v2/posts?search=" + this.searchField.val(), posts => {
-      if (!posts.length) {
-        this.resultsDiv.html("<p>No results found.</p>");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(universityData.root_url + "/wp-json/university/v1/search?term=" + this.searchField.val(), results => {
+      if (!results.length) {
+        this.resultsDiv.html("<p>Nenhum resultado encontrado.</p>");
+        this.isSpinnerInvisible = false;
         return;
       }
       this.resultsDiv.html(`
-          <h2 class="search-overlay__section-title">Resultados</h2>
-          <ul class="link-list min-list">
-            ${posts.map(post => `
-                  <li>
-                    <a href="${post.link}">
-                      ${post.title.rendered}
-                    </a>
-                  </li>
-                `).join("")}
-          </ul>
-        `);
+        <h2 class="search-overlay__section-title">Resultados</h2>
+
+        <ul class="link-list min-list">
+          ${results.map(item => `
+                <li>
+                  <a href="${item.link}">
+                    ${item.title}
+                  </a>
+                  - ${item.typeLabel}
+                </li>
+              `).join("")}
+        </ul>
+      `);
+      this.isSpinnerInvisible = false;
+    }).fail(() => {
+      this.resultsDiv.html("<p>Erro ao pesquisar.</p>");
       this.isSpinnerInvisible = false;
     });
   }

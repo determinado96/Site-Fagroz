@@ -6,7 +6,7 @@ $order = isset($_GET['order']) && in_array(strtolower($_GET['order']), ['asc', '
 $search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
 
 $query_args = [
-  'post_type' => 'agronegocio-dest',
+  'post_type' => 'agribusiness-hl',
   'post_status' => 'publish',
   'posts_per_page' => get_option('posts_per_page'),
   'paged' => $paged,
@@ -65,7 +65,7 @@ $pagination = paginate_links([
           </label>
         </div>
 
-        <form id="archive-agronomy-highlights-form" class="archive-agronomy-highlights__search" role="search" method="get" action="<?php echo esc_url(get_post_type_archive_link('agronegocio-dest')); ?>">
+        <form id="archive-agronomy-highlights-form" class="archive-agronomy-highlights__search" role="search" method="get" action="<?php echo esc_url(get_post_type_archive_link('agribusiness-hl')); ?>">
           <input type="search" name="s" value="<?php echo esc_attr($search); ?>" placeholder="Pesquisar destaque..." />
         </form>
       </div>

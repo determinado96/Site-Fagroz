@@ -5,7 +5,7 @@
 
     <?php
     $highlights = new WP_Query([
-      'post_type'      => 'agronegocio-dest',
+      'post_type'      => 'agribusiness-hl',
       'posts_per_page' => -1,
       'post_status'    => 'publish',
       'orderby'        => 'menu_order',

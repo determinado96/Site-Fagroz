@@ -1,6 +1,7 @@
 <?php
-if (!function_exists('fagroz_get_zootechny_highlight_tags')) {
-  function fagroz_get_zootechny_highlight_tags(int $post_id = 0): array
+
+if (!function_exists('fagroz_get_agribusiness_hl_tags')) {
+  function fagroz_get_agribusiness_hl_tags(int $post_id = 0): array
   {
     $post_id = $post_id ?: get_the_ID();
 
@@ -18,11 +19,11 @@ if (!function_exists('fagroz_get_zootechny_highlight_tags')) {
   }
 }
 
-if (!function_exists('fagroz_get_zootechny_highlight_related_posts')) {
-  function fagroz_get_zootechny_highlight_related_posts(int $post_id, array $tag_ids = []): array
+if (!function_exists('fagroz_get_agribusiness_hl_related_posts')) {
+  function fagroz_get_agribusiness_hl_related_posts(int $post_id, array $tag_ids = []): array
   {
     $args = [
-      'post_type' => 'zootechny-highlight',
+      'post_type' => 'agribusiness-hl',
       'posts_per_page' => 2,
       'post__not_in' => [$post_id],
       'ignore_sticky_posts' => true,

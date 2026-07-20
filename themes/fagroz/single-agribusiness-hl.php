@@ -1,7 +1,7 @@
 <!-- 
-  Exibe um post individual definido como padrão
+  Exibe um post do tipo agribusiness-hl
   Ordem para chegar nesse arquivo:
-  *single-post.php
+  *single-{post_type}.phps
   single.php
   singular.php
   index.php
@@ -10,10 +10,9 @@
 get_header();
 while (have_posts()) :
   the_post();
-  $acfNews = get_field('news') ?: [];
-  $heroImage = $acfNews['hero_image'] ?? [];
-  $title = !empty($heroImage['title']) ? $heroImage['title'] : get_the_title();
-  $bg_photo = $heroImage['bg_photo'] ?? '';
+  $acfAgribusinessHighlight = get_field('agribusiness_hl') ?: [];
+  $title = $acfAgribusinessHighlight['title'] ?: get_the_title();
+  $bg_photo = $acfAgribusinessHighlight['bg_photo'] ?? '';
   if (is_array($bg_photo)) {
     $bg_photo = $bg_photo['url'] ?? '';
   }
@@ -28,13 +27,12 @@ while (have_posts()) :
       'image' => $bg_photo,
     ]
   );
-  $category_meta = fagroz_get_post_category_meta(get_the_ID(), 'sem-categoria');
-  $tags = get_the_tags();
+  $tags = fagroz_get_agribusiness_hl_tags();
   $tag_ids = !empty($tags) ? wp_list_pluck($tags, 'term_id') : [];
-  $related_posts = fagroz_get_related_posts(get_the_ID(), $tag_ids);
+  $related_posts = fagroz_get_agribusiness_hl_related_posts(get_the_ID(), $tag_ids);
 ?>
-  <div class="container container--single page-section">
-    <div class="single-article">
+  <div class="container container--single page-section highlights-single">
+    <div class="single-article single-article--highlight">
       <main class="single-article__main">
         <div class="metabox metabox--position-up metabox--with-home-link">
           <p>
@@ -47,11 +45,12 @@ while (have_posts()) :
             <span class="dashicons dashicons-arrow-right-alt2"></span>
             <span class="metabox__main">
               <?php
-              $posts_page_id = get_option('page_for_posts');
-              if ($posts_page_id) :
+              $archive = get_post_type_archive_link('agribusiness-hl');
+              $post_type_object = get_post_type_object('agribusiness-hl');
+              if ($archive && $post_type_object) :
               ?>
-                <a href="<?php echo esc_url(get_permalink($posts_page_id)); ?>">
-                  <?php echo esc_html(get_the_title($posts_page_id)); ?>
+                <a href="<?php echo esc_url($archive); ?>">
+                  <?php echo esc_html($post_type_object->labels->name ?: 'Todos os destaques'); ?>
                 </a>
                 <span class="dashicons dashicons-arrow-right-alt2"></span>
               <?php endif; ?>
@@ -61,16 +60,11 @@ while (have_posts()) :
             </span>
           </p>
         </div>
-        <span class="preview-card__label <?php echo esc_attr($category_meta['class'] ?? ''); ?>">
-          <?php echo esc_html($category_meta['text']); ?>
-        </span>
-        <div class="generic-content">
+        <div class="generic-content highlights-single__content">
           <?php the_title(); ?>
           <?php the_content(); ?>
         </div>
-        <?php
-        if ($tags) :
-        ?>
+        <?php if ($tags) : ?>
           <div class="post-taglines">
             <p class="post-taglines__title">Taglines:</p>
             <div class="post-taglines__list">
@@ -90,7 +84,7 @@ while (have_posts()) :
         get_template_part('template-parts/components/related-posts', null, [
           'title' => 'Leia também',
           'posts' => $related_posts,
-          'show_label' => true,
+          'show_label' => false,
         ]);
         ?>
       </aside>
@@ -98,4 +92,5 @@ while (have_posts()) :
   </div>
 <?php
 endwhile;
+
 get_footer();

@@ -1,6 +1,7 @@
 <?php
 $title = $args['title'] ?? '';
 $posts = $args['posts'] ?? [];
+$show_label = $args['show_label'] ?? false;
 
 if (empty($posts)) {
   return;
@@ -17,9 +18,11 @@ if (empty($posts)) {
       style="background-image: url('<?php echo esc_url($post['thumbnail']); ?>');"
       aria-label="<?php echo esc_attr($post['title']); ?>">
       <div class="related-card__labels">
-        <span class="preview-card__label <?php echo esc_attr($post['label_class'] ?? ''); ?>">
-          <?php echo esc_html($post['label_text']); ?>
-        </span>
+        <?php if ($show_label) : ?>
+          <span class="preview-card__label <?php echo esc_attr($post['label_class'] ?? ''); ?>">
+            <?php echo esc_html($post['label_text']); ?>
+          </span>
+        <?php endif; ?>
         <span class="preview-card__label related-card__date--pill">
           <?php echo esc_html($post['date']); ?>
         </span>

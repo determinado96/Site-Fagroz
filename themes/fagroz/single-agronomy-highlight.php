@@ -1,39 +1,36 @@
+<!-- 
+  Exibe um post do tipo agronomy-highlight
+  Ordem para chegar nesse arquivo:
+  *single-{post_type}.phps
+  single.php
+  singular.php
+  index.php
+-->
 <?php
-
-/**
- * Template singular para os destaques de agronomia.
- */
-
 get_header();
-
 while (have_posts()) :
   the_post();
-
-  $acf_heroImage = get_field('hero_image');
-  $title = $acf_heroImage['title'] ?? '';
-  $bg_photo = $acf_heroImage['bg_photo'] ?? '';
-
+  $acfAgronomyHighlight = get_field('agronomy_highlight') ?: [];
+  $title = $acfAgronomyHighlight['title'] ?: get_the_title();
+  $bg_photo = $acfAgronomyHighlight['bg_photo'] ?? '';
   if (is_array($bg_photo)) {
     $bg_photo = $bg_photo['url'] ?? '';
   }
-
-  if (!empty($title) && !empty($bg_photo)) {
-    get_template_part(
-      'template-parts/components/hero/hero-image',
-      null,
-      [
-        'title' => $title,
-        'image' => $bg_photo,
-      ]
-    );
+  if (empty($bg_photo)) {
+    $bg_photo = get_the_post_thumbnail_url(get_the_ID(), 'full');
   }
-
-  $category_meta = fagroz_get_post_category_meta(get_the_ID(), 'sem-categoria');
+  get_template_part(
+    'template-parts/components/hero/post-hero-image',
+    null,
+    [
+      'title' => $title,
+      'image' => $bg_photo,
+    ]
+  );
   $tags = fagroz_get_agronomy_highlight_tags();
   $tag_ids = !empty($tags) ? wp_list_pluck($tags, 'term_id') : [];
   $related_posts = fagroz_get_agronomy_highlight_related_posts(get_the_ID(), $tag_ids);
 ?>
-
   <div class="container container--single page-section highlights-single">
     <div class="single-article single-article--highlight">
       <main class="single-article__main">
@@ -48,37 +45,25 @@ while (have_posts()) :
             <span class="dashicons dashicons-arrow-right-alt2"></span>
             <span class="metabox__main">
               <?php
-              // Link to the CPT archive for 'agronomy-highlight'
-              $archive_link = get_post_type_archive_link('agronomy-highlight');
-              $archive_title = '';
-              $pt_obj = get_post_type_object('agronomy-highlight');
-              if ($pt_obj && isset($pt_obj->labels->name)) {
-                $archive_title = $pt_obj->labels->name;
-              }
-              if ($archive_link) :
+              $archive = get_post_type_archive_link('agronomy-highlight');
+              $post_type_object = get_post_type_object('agronomy-highlight');
+              if ($archive && $post_type_object) :
               ?>
-                <a href="<?php echo esc_url($archive_link); ?>">
-                  <?php echo esc_html($archive_title ?: 'Destaques do curso'); ?>
+                <a href="<?php echo esc_url($archive); ?>">
+                  <?php echo esc_html($post_type_object->labels->name ?: 'Todos os destaques'); ?>
                 </a>
                 <span class="dashicons dashicons-arrow-right-alt2"></span>
               <?php endif; ?>
-              Destaque do curso
               <?php echo esc_html(get_the_date('d/m/Y')); ?>
               às
               <?php echo esc_html(get_the_time('H:i')); ?>
             </span>
           </p>
         </div>
-
-        <span class="preview-card__label <?php echo esc_attr($category_meta['class'] ?? ''); ?>">
-          <?php echo esc_html($category_meta['text']); ?>
-        </span>
-
         <div class="generic-content highlights-single__content">
           <?php the_title(); ?>
           <?php the_content(); ?>
         </div>
-
         <?php if ($tags) : ?>
           <div class="post-taglines">
             <p class="post-taglines__title">Taglines:</p>
@@ -94,12 +79,12 @@ while (have_posts()) :
           </div>
         <?php endif; ?>
       </main>
-
       <aside class="single-article__sidebar">
         <?php
         get_template_part('template-parts/components/related-posts', null, [
           'title' => 'Leia também',
           'posts' => $related_posts,
+          'show_label' => false,
         ]);
         ?>
       </aside>
@@ -107,5 +92,4 @@ while (have_posts()) :
   </div>
 <?php
 endwhile;
-
 get_footer();

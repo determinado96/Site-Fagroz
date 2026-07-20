@@ -42,34 +42,42 @@ class Search {
   getResults() {
     $.getJSON(
       universityData.root_url +
-      "/wp-json/wp/v2/posts?search=" +
+      "/wp-json/university/v1/search?term=" +
       this.searchField.val(),
-      (posts) => {
-        if (!posts.length) {
-          this.resultsDiv.html("<p>No results found.</p>");
+      (results) => {
+        if (!results.length) {
+          this.resultsDiv.html("<p>Nenhum resultado encontrado.</p>");
+          this.isSpinnerInvisible = false;
           return;
         }
 
         this.resultsDiv.html(`
-          <h2 class="search-overlay__section-title">Resultados</h2>
-          <ul class="link-list min-list">
-            ${posts
+        <h2 class="search-overlay__section-title">Resultados</h2>
+
+        <ul class="link-list min-list">
+          ${results
             .map(
-              (post) => `
-                  <li>
-                    <a href="${post.link}">
-                      ${post.title.rendered}
-                    </a>
-                  </li>
-                `,
+              item => `
+                <li>
+                  <a href="${item.link}">
+                    ${item.title}
+                  </a>
+                  - ${item.typeLabel}
+                </li>
+              `
             )
             .join("")}
-          </ul>
-        `);
+        </ul>
+      `);
+
         this.isSpinnerInvisible = false;
-      },
-    );
+      }
+    ).fail(() => {
+      this.resultsDiv.html("<p>Erro ao pesquisar.</p>");
+      this.isSpinnerInvisible = false;
+    });
   }
+
 
   openOverlay() {
     this.searchOverlay.addClass("search-overlay--active");
